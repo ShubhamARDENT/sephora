@@ -316,6 +316,7 @@ a:link {
   width: 100%;
 }
 
+/* banner img */
 .img-figure {
   overflow: hidden;
   width: 100%;
@@ -323,6 +324,7 @@ a:link {
   padding: 35px 5%;
 }
 
+/* banner img */
 .img-figure img {
   object-fit: cover;
   object-position: center;
@@ -357,6 +359,10 @@ a:link {
   font-weight: 600;
 }
 
+.bestseller_img img {
+  width: 70%;
+}
+
 .justarrived .wrapper {
   width: 80%;
 }
@@ -374,6 +380,20 @@ a:link {
   font-weight: 600;
 }
 
-.justarrived_list span:first-of-type {
+.justarrived_list > span {
   font-weight: 600;
+}
+
+.justarrived_img img {
+  width: 70%;
+}
+
+.justarrived_icon::before {
+  content: "\f005\f005\f005\f005";
+  font-weight: 600;
+  font-family: "Font Awesome 5 Free";
+}
+
+.justarrived_icon > span {
+  display: none;
 }
