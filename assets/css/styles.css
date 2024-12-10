@@ -264,6 +264,7 @@ a:link {
   font-family: "lato", sans-serif;
   font-size: 1.2rem;
   border: none;
+  /* to remove default search box border  */
   outline: none;
 }
 
@@ -333,8 +334,8 @@ a:link {
 
 /* banner img */
 .img-figure {
-  overflow: hidden;
   width: 100%;
+  overflow: hidden;
   height: 400px;
   padding: 35px 5%;
 }
@@ -343,6 +344,7 @@ a:link {
 .img-figure img {
   object-fit: cover;
   object-position: center;
+  height: auto;
 }
 
 .bestseller .wrapper {
@@ -357,7 +359,7 @@ a:link {
 
 .bestseller_lists li {
   width: 25%;
-  margin-top: 10px;
+  margin-top: 23px;
   text-align: center;
 }
 
@@ -365,7 +367,7 @@ a:link {
   font-weight: 600;
 }
 
-.bestseller_list span:nth-of-type(2) {
+.product_price {
   font-weight: 600;
 }
 
@@ -386,6 +388,40 @@ a:link {
 .bestseller_icon > span {
   display: none;
 }
+
+.bestseller_desc {
+  padding: 10px 18%;
+}
+
+.pagination .wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 23px;
+  margin-bottom: 23px;
+}
+
+.pagination li {
+  padding: 8px 16px;
+  color: black;
+  float: left;
+  cursor: pointer;
+  border: 1px solid #ddd;
+  margin: 0 4px;
+}
+
+.page_list a {
+  color: black;
+}
+
+.page_list:hover {
+  background-color: pink;
+}
+/* on the page give class to anchor  from js*/
+.page_list .active {
+  background-color: green;
+}
+
+/* responsive  */
 
 @media screen and (max-width: 1024px) {
   .bestseller_lists li {
