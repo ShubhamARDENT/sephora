@@ -476,3 +476,17 @@ a:link {
     height: 200px;
   }
 }
+
+@media screen and (max-width: 425px) {
+  .nav_input {
+    width: 42%;
+  }
+
+  .bestseller_lists {
+    justify-content: center;
+  }
+
+  .bestseller_lists li {
+    width: 70%;
+  }
+}
