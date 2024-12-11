@@ -82,10 +82,7 @@ const listContainer = document.querySelector(".bestseller_lists");
 
 // search functionality
 const search = document.querySelector(".search-box");
-search.addEventListener("input", async (e) => {
-  const value = e.target.value.toLowerCase();
-  // console.log(value);
-
+async function searchAndDisplay(value) {
   let searchUrl = `${productsApi}/search?q=${value}`;
   const searchResponse = await fetch(searchUrl).then((res) => res.json());
   const { products } = searchResponse;
@@ -120,7 +117,7 @@ search.addEventListener("input", async (e) => {
         `;
     listContainer.appendChild(productList);
   });
-});
+}
 
 function getRatingStars(rating) {
   const roundedRating = Math.round(rating);
@@ -134,3 +131,20 @@ function getRatingStars(rating) {
   }
   return stars;
 }
+
+function debouncedFunction(func, delay) {
+  let timeout = null;
+  return () => {
+    if (timeout) clearTimeout(timeout);
+    timeout = setTimeout(() => {
+      func();
+    }, delay);
+  };
+}
+
+search.addEventListener("input", () => {
+  debouncedFunction((e) => {
+    const value = e.target.value;
+    searchAndDisplay(value);
+  }, 300);
+});
