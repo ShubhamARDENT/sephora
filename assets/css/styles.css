@@ -740,6 +740,10 @@ a:link {
 button.active {
   background-color: pink;
 }
+
+.pagination_container {
+  display: flex;
+}
 /* responsive  */
 
 @media screen and (max-width: 1024px) {
