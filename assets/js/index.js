@@ -3,49 +3,51 @@ const productsApi = "https://dummyjson.com/products";
 
 const productsPerPage = 12;
 let currentPage = 1;
-
-// fetch and dispaly
+const listContainer = document.querySelector(".bestseller_lists");
+// fetch and dispaly only 12 products per page
 (async function fetchAndDisplay(page = 1) {
-  const productNames = document.querySelectorAll(".bestseller_name");
-  const productImges = document.querySelectorAll(".product_img");
-  const productDesc = document.querySelectorAll(".bestseller_desc");
-  const productPrice = document.querySelectorAll(".product_price");
   const paginationContainer = document.querySelector(".page_container");
 
-  const rating = document.querySelectorAll(".bestseller_icon");
   currentPage = page;
   // console.log(currentPage);
   const skip = (currentPage - 1) * productsPerPage;
-  const url = `${productsApi}?limit=${productsPerPage}&skip=${skip}&select=title,description,price,thumbnail,rating`;
+  const url = `${productsApi}?limit=${productsPerPage}&skip=${skip}&select=title,description,price,thumbnail,rating,tags`;
   const productsData = await fetch(url).then((response) => response.json());
   // console.log(productsData, "response");
   const { products, total } = productsData;
-
   // console.log(products);
   // rendering of products
-  // displayBox.innerHTML = "";
+  listContainer.innerHTML = "";
+
   paginationContainer.innerHTML = "";
 
-  products.forEach((product, index) => {
-    rating[index].innerHTML = "";
-    productNames[index].innerHTML = product.title;
-    productImges[index].src = product.thumbnail;
-    const products = product.description.split(" ").slice(1, 10);
-    productDesc[index].innerHTML = products.join(" ").concat("...");
-    productPrice[index].innerHTML = `$${product.price}`;
-    // console.log(product.rating);
+  products.forEach((product) => {
+    const productList = document.createElement("li");
 
-    const productRating = Math.round(product.rating);
+    productList.innerHTML = `<figure class="bestseller_img">
+                  <img
+                    src="${product.thumbnail}"
+                    alt="bestseller_img"
+                    class="product_img"
+                  />
+                </figure>
 
-    for (let i = 0; i < 5; i++) {
-      const star = document.createElement("i");
-      if (i < productRating) {
-        star.classList.add("fa-solid", "fa-star");
-      } else {
-        star.classList.add("fa-regular", "fa-star");
-      }
-      rating[index].appendChild(star);
-    }
+                <p class="bestseller_name">${product.title}</p>
+                <p class="bestseller_desc">
+                  ${product.description
+                    .split(" ")
+                    .slice(1, 10)
+                    .join(" ")
+                    .concat("...")}
+                </p>
+                <span class="product_price">$${Math.round(product.price)}</span>
+                <div class="bestseller_icon_container">
+                  <span class="bestseller_icon">${getRatingStars(
+                    product.rating
+                  )}</span>
+                </div>
+    `;
+    listContainer.appendChild(productList);
   });
 
   const totalPages = Math.ceil(total / productsPerPage);
@@ -67,7 +69,7 @@ let currentPage = 1;
     button.onclick = () => fetchAndDisplay(i);
     paginationContainer.appendChild(button);
   }
-  // forwards buttont
+  // forwards button
   const forwardButton = document.createElement("button");
   forwardButton.classList.add("pagination_button");
   forwardButton.innerHTML = ">";
@@ -78,4 +80,57 @@ let currentPage = 1;
   paginationContainer.appendChild(forwardButton);
 })(currentPage);
 
+// search functionality
+const search = document.querySelector(".search-box");
+search.addEventListener("input", async (e) => {
+  const value = e.target.value.toLowerCase();
+  // console.log(value);
 
+  let searchUrl = `${productsApi}/search?q=${value}`;
+  const searchResponse = await fetch(searchUrl).then((res) => res.json());
+  const { products } = searchResponse;
+  listContainer.innerHTML = "";
+  products.forEach((product) => {
+    const productList = document.createElement("li");
+
+    productList.innerHTML = `<figure class="bestseller_img">
+                      <img
+                        src="${product.thumbnail}"
+                        alt="bestseller_img"
+                        class="product_img"
+                      />
+                    </figure>
+
+                    <p class="bestseller_name">${product.title}</p>
+                    <p class="bestseller_desc">
+                      ${product.description
+                        .split(" ")
+                        .slice(1, 10)
+                        .join(" ")
+                        .concat("...")}
+                    </p>
+                    <span class="product_price">$${Math.round(
+                      product.price
+                    )}</span>
+                    <div class="bestseller_icon_container">
+                      <span class="bestseller_icon">${getRatingStars(
+                        product.rating
+                      )}</span>
+                    </div>
+        `;
+    listContainer.appendChild(productList);
+  });
+});
+
+function getRatingStars(rating) {
+  const roundedRating = Math.round(rating);
+  let stars = "";
+  for (let i = 0; i < 5; i++) {
+    if (i < roundedRating) {
+      stars += `<i class="fa-solid fa-star"></i>`;
+    } else {
+      stars += `<i class="fa-regular fa-star"></i>`;
+    }
+  }
+  return stars;
+}
