@@ -829,6 +829,15 @@ a:link {
   width: 25%;
   margin-top: 23px;
   text-align: center;
+  cursor: pointer;
+}
+
+.bestseller_lists li:hover {
+  width: 25%;
+  margin-top: 23px;
+  text-align: center;
+  cursor: pointer;
+  background-color: gray;
 }
 
 .bestseller_list p:first-of-type {
@@ -846,12 +855,6 @@ a:link {
 .bestseller_img img {
   width: 70%;
 }
-
-/* .icon_font {
-  content: "\f005\f005\f005\f005";
-  font-weight: 600;
-  font-family: "Font Awesome 5 Free";
-} */
 
 .bestseller_icon > span {
   display: none;
@@ -892,7 +895,7 @@ a:link {
   margin-right: 10px;
   border: none;
   font-size: 1.2rem;
-  font-family: "lato", sans-serif;
+  font-family: "Oswald", sans-serif;
 }
 
 button.active {
@@ -906,6 +909,86 @@ button.active {
 .bestseller_name {
   font-weight: 600;
 }
+
+/* single product */
+
+.parent {
+  display: flex;
+  padding: 20px;
+  align-items: center;
+}
+
+.product_container {
+  margin-top: 70px;
+}
+
+.child2 {
+  width: 52%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.child1 {
+  width: 75%;
+}
+
+.child3 {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.product_img img {
+  width: 50%;
+}
+
+.product_title {
+  font-size: 2rem;
+  font-weight: 600;
+}
+.product_price {
+  font-size: 1.2rem;
+}
+
+.product_tax {
+  font-size: 0.8rem;
+}
+.cart {
+  padding: 10px 10%;
+  background-color: black;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-size: 1rem;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.buy_it_now {
+  padding: 10px 10%;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-size: 1rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: black;
+}
+
+.back_to_home {
+  padding: 10px 10%;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-size: 1rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: black;
+}
+/* from feature js */
+/* start css */
+
 /* responsive  */
 
 @media screen and (max-width: 1024px) {
